@@ -38,6 +38,8 @@ if __name__ == '__main__':
     labelName = [label.replace(".txt", ".jpg") for label in labelName]
     lackImages = set(imageName) - set(labelName)
 
-    for file in lackImages:
-        os.remove(os.path.join(imageRootPath,file))
-        #print(os.path.join(imageRootPath,file))
+    with open('badlists.txt', 'w') as f:
+        for file in tqdm(lackImages):
+            f.write(file+'\n')
+            os.remove(os.path.join(imageRootPath, file))
+        # print(os.path.join(imageRootPath,file))

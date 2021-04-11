@@ -45,6 +45,10 @@ def convertBdd100k2yolo(imageFileName, label):
     dh = 1.0/height
 
     catName = label['category']
+    '''
+    if(catName == "rider"):
+        catName = "person"
+    '''
     classIndex = classes.index(catName)
     roi = label['box2d']
 
@@ -89,3 +93,7 @@ if __name__ == '__main__':
                     file.write(convertBdd100k2yolo(imagePath,label))
 
     print(counter)
+    filename = args.type + '.txt'
+    with open(filename,'w') as f:
+        for k,v in counter.items():
+            f.write("{}:{}\n".format(k,v))
